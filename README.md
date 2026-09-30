@@ -12,23 +12,6 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## 📥 Links de Download (Ferramentas Necessárias)
-
-Para que todo o sistema funcione, certifique-se de ter os seguintes programas instalados:
-* **Python (Versão 3.x):** [Baixar no Site Oficial da Python](https://www.python.org/downloads/) *(Lembre-se de marcar a opção "Add Python to PATH" durante a instalação)*
-* **AutoHotkey (v2.0):** [Baixar no Site Oficial da AutoHotkey](https://www.autohotkey.com/)
-* **Google Chrome / Microsoft Edge:** Navegador compatível com extensões Web.
-* **Google Keep:** [Acessar a Aplicação Web](https://keep.google.com/)
-
----
-
-## ⚠️ AVISO IMPORTANTE SOBRE A PASTA DO PROJETO
-
-> **NÃO MOVA A PASTA DO PROJETO DE LUGAR APÓS CONFIGURAR A EXTENSÃO!**
-> Se precisar de alterar a pasta do projeto de diretório no computador, o caminho de referência da extensão do Chrome será invalidado. Caso isso aconteça, será obrigado a remover a extensão do navegador (`chrome://extensions`) e a **carregá-la novamente** de forma manual apontando para o novo local.
-
----
-
 ## 📐 Arquitetura do Sistema
 
 1. **Extensão Web (Chrome/Edge):** Lê as notas do Google Keep e envia a lista de códigos para a API Python via requisição HTTP POST (`http://127.0.0.1:8000/update`).
@@ -38,7 +21,7 @@ Para que todo o sistema funcione, certifique-se de ter os seguintes programas in
 
 ---
 
-## 📁 Estrutura de Arquivos
+##  Estrutura de Arquivos
 
 * `impressao_1707.ahk` — Script principal do AutoHotkey (automação e interface nativa de status).
 * `servidor_keep.py` — Servidor HTTP local sem dependências externas (biblioteca nativa `http.server`).
@@ -52,7 +35,7 @@ Para que todo o sistema funcione, certifique-se de ter os seguintes programas in
 
 ---
 
-## 🚀 Como Usar no Dia a Dia
+##  Como Usar no Dia a Dia
 
 ### 1. Iniciar o Sistema
 * Dê um duplo clique no arquivo **`Iniciar tudo.bat`**.
@@ -82,7 +65,7 @@ Para que todo o sistema funcione, certifique-se de ter os seguintes programas in
 
 ---
 
-## 🎯 Calibração de Coordenadas (Apenas se mudar de monitor/resolução)
+##  Calibração de Coordenadas (Apenas se mudar de monitor/resolução)
 
 Se você mudar a resolução da tela ou mover a janela do WinThor:
 1. Feche os serviços correntes com o **`Encerrar tudo.bat`**.
@@ -93,7 +76,7 @@ Se você mudar a resolução da tela ou mover a janela do WinThor:
 
 ---
 
-## 🛠️ Solução de Problemas Rápidos
+##  Solução de Problemas Rápidos
 
 * **Extensão exibindo "Servidor Python desligado":** Execute o `Encerrar tudo.bat`, depois o `Iniciar tudo.bat` e pressione `F5` na aba do Google Keep.
 * **Coordenadas clicando no lugar errado:** Certifique-se de que a janela do WinThor está maximizada no mesmo monitor onde as coordenadas foram salvas.
