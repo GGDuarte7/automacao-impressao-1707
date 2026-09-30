@@ -12,6 +12,23 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
+## 📥 Links de Download (Ferramentas Necessárias)
+
+Para que todo o sistema funcione, certifique-se de ter os seguintes programas instalados:
+* **Python (Versão 3.x):** [Baixar no Site Oficial da Python](https://www.python.org/downloads/) *(Lembre-se de marcar a opção "Add Python to PATH" durante a instalação)*
+* **AutoHotkey (v2.0):** [Baixar no Site Oficial da AutoHotkey](https://www.autohotkey.com/)
+* **Google Chrome / Microsoft Edge:** Navegador compatível com extensões Web.
+* **Google Keep:** [Acessar a Aplicação Web](https://keep.google.com/)
+
+---
+
+## ⚠️ AVISO IMPORTANTE SOBRE A PASTA DO PROJETO
+
+> **NÃO MOVA A PASTA DO PROJETO DE LUGAR APÓS CONFIGURAR A EXTENSÃO!**
+> Se precisar de alterar a pasta do projeto de diretório no computador, o caminho de referência da extensão do Chrome será invalidado. Caso isso aconteça, será obrigado a remover a extensão do navegador (`chrome://extensions`) e a **carregá-la novamente** de forma manual apontando para o novo local.
+
+---
+
 ## 📐 Arquitetura do Sistema
 
 1. **Extensão Web (Chrome/Edge):** Lê as notas do Google Keep e envia a lista de códigos para a API Python via requisição HTTP POST (`http://127.0.0.1:8000/update`).
@@ -54,7 +71,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## ⌨️️ Teclas de Atalho (Hotkeys)
+## ⌨️ Teclas de Atalho (Hotkeys)
 
 | Tecla | Função |
 | :---: | :--- |
