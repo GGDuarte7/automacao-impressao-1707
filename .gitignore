@@ -1,0 +1,12 @@
+# Cache do Python e arquivos compilados
+__pycache__/
+*.pyc
+
+# Arquivos de log e backups de códigos
+backup_codigos/
+backup_codigos*.txt
+codigos.txt
+status.json
+
+# Configurações do VS Code ou IDLE
+.vscode/

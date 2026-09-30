@@ -1,0 +1,25 @@
+{
+    "PASTA_PROJETO": "C:\\Users\\D8059GD\\Documents\\AUT_IMP",
+    "NOME_IMPRESSORA": "WMS2",
+    "TITULO_KEEP": "WinThor",
+    "ARQUIVO_CODIGOS": "codigos.txt",
+    "TIMEOUT": 15,
+    "COORDENADAS": {
+        "CampoCodigo_X": 2273,
+        "CampoCodigo_Y": 76,
+        "BotaoImprimir2_X": 1937,
+        "BotaoImprimir2_Y": 34,
+        "BotaoTrocarImpressora_X": 2781,
+        "BotaoTrocarImpressora_Y": 316,
+        "ImpressoraWMS2_X": 2789,
+        "ImpressoraWMS2_Y": 446,
+        "BotaoOK_X": 2992,
+        "BotaoOK_Y": 656,
+        "BotaoOK_Informacao_X": 2883,
+        "BotaoOK_Informacao_Y": 554,
+        "BotaoImprimirUniversal_X": 880,
+        "BotaoImprimirUniversal_Y": 404,
+        "BotaoFechar_X": 2412,
+        "BotaoFechar_Y": 35
+    }
+}
