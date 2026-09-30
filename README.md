@@ -12,7 +12,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## 📐 Arquitetura do Sistema
+##  Arquitetura do Sistema
 
 1. **Extensão Web (Chrome/Edge):** Lê as notas do Google Keep e envia a lista de códigos para a API Python via requisição HTTP POST (`http://127.0.0.1:8000/update`).
 2. **Servidor Python (`servidor_keep.py`):** Servidor HTTP leve em segundo plano que recebe os códigos e atualiza dinamicamente o arquivo `codigos.txt` na pasta configurada do projeto.
@@ -21,7 +21,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## 📁 Estrutura de Arquivos
+##  Estrutura de Arquivos
 
 * `impressao_1707.ahk` — Script principal do AutoHotkey (automação e interface nativa de status).
 * `servidor_keep.py` — Servidor HTTP local sem dependências externas (biblioteca nativa `http.server`).
@@ -35,7 +35,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## 🚀 Como Usar no Dia a Dia
+##  Como Usar no Dia a Dia
 
 ### 1. Iniciar o Sistema
 * Dê um duplo clique no arquivo **`Iniciar tudo.bat`**.
@@ -54,7 +54,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## ⌨️️ Teclas de Atalho (Hotkeys)
+##  Teclas de Atalho (Hotkeys)
 
 | Tecla | Função |
 | :---: | :--- |
@@ -65,7 +65,7 @@ Assista ao vídeo abaixo para ver a demonstração prática do funcionamento e o
 
 ---
 
-## 🎯 Calibração de Coordenadas (Apenas se mudar de monitor/resolução)
+##  Calibração de Coordenadas (Apenas se mudar de monitor/resolução)
 
 Se você mudar a resolução da tela ou mover a janela do WinThor:
 1. Feche os serviços correntes com o **`Encerrar tudo.bat`**.
@@ -76,7 +76,7 @@ Se você mudar a resolução da tela ou mover a janela do WinThor:
 
 ---
 
-## 🛠️ Solução de Problemas Rápidos
+##  Solução de Problemas Rápidos
 
 * **Extensão exibindo "Servidor Python desligado":** Execute o `Encerrar tudo.bat`, depois o `Iniciar tudo.bat` e pressione `F5` na aba do Google Keep.
 * **Coordenadas clicando no lugar errado:** Certifique-se de que a janela do WinThor está maximizada no mesmo monitor onde as coordenadas foram salvas.
