@@ -1,5 +1,5 @@
 # Em caso de dúvidas ou problemas durante o uso 
-* Entrar em contato pelo e-mail: gabriel.duarte@dellys.com.br ou D8059GD@dellys.com.br
+* Entrar em contato pelo e-mail ou pelo microsoft teams: gabriel.duarte@dellys.com.br ou D8059GD@dellys.com.br
 
 ---
 
