@@ -1,4 +1,4 @@
-console.log("WinThor Keep AutoSync v5.3 Carregado!");
+console.log("WinThor Keep AutoSync v7.0 - Modo Estrito Visível");
 
 function criarIndicador() {
     if (document.getElementById("winthor-status-badge")) return;
@@ -33,40 +33,38 @@ window.ultimosCodigosEnviados = "";
 window.mostrarSucesso = false;
 
 function obterTextoCorpoNota() {
-    // Procura a nota aberta ou, em alternativa, o corpo inteiro do Keep
-    let container = document.querySelector('div[role="dialog"]') || document.body;
-    
-    // Procura as caixas de texto editáveis reais onde o Keep guarda os dados
-    let editaveis = Array.from(container.querySelectorAll('div[contenteditable="true"]'));
-    let textoTotal = "";
+    // 1. Tenta ler se a nota estiver aberta no meio do ecrã (pop-up)
+    let dialog = document.querySelector('div[role="dialog"]');
+    if (dialog && dialog.innerText.toLowerCase().includes("winthor")) {
+        return dialog.innerText || "";
+    }
 
-    editaveis.forEach(el => {
-        let label = el.getAttribute('aria-label') || "";
-        // Ignora as barras de pesquisa
-        if (label.includes('Pesquisar') || label.includes('Search')) return;
+    // 2. Se estiver fechada, lê os "cards" (grelha) da página inicial SEM PRECISAR CLICAR
+    let cards = document.querySelectorAll('div[role="button"], div.IZ65hb-TB32B, div.RNfche');
+    for (let card of cards) {
+        let textoCard = card.innerText || "";
+        if (textoCard.toLowerCase().includes("winthor")) {
+            return textoCard;
+        }
+    }
 
-        // USA O HTML INTERNO em vez do innerText visual.
-        // Assim, a extração funciona perfeitamente com a janela minimizada!
-        let html = el.innerHTML || "";
-        let textoConvertido = html
-            .replace(/&nbsp;/g, ' ')            // Converte espaços HTML
-            .replace(/<br\s*\/?>/gi, '\n')      // Converte quebras de linha simples
-            .replace(/<\/div>/gi, '\n')         // Converte blocos de linha (divs)
-            .replace(/<\/p>/gi, '\n')           // Converte parágrafos
-            .replace(/<[^>]*>/g, '');           // Remove qualquer outra tag de formatação
-        
-        textoTotal += textoConvertido + "\n";
-    });
-
-    return textoTotal;
+    return "";
 }
 
 function verificarKeep() {
+    // ====================================================================
+    // TRAVA DE SEGURANÇA: Só executa se a aba do Google Keep estiver
+    // aberta e visível no ecrã. Se minimizar o Chrome, ele não faz NADA.
+    // ====================================================================
+    if (document.visibilityState !== "visible") {
+        return; 
+    }
+
     criarIndicador();
     let textoCorpo = obterTextoCorpoNota();
 
     if (!textoCorpo || textoCorpo.trim() === "") {
-        if (!window.mostrarSucesso) atualizarStatus("🟡 Abra a nota WinThor no Keep", "#ca8a04", "#ffffff");
+        if (!window.mostrarSucesso) atualizarStatus("🟡 Nota 'WinThor' não encontrada", "#ca8a04", "#ffffff");
         return;
     }
 
@@ -75,17 +73,16 @@ function verificarKeep() {
 
     linhas.forEach(linha => {
         let linhaLimpa = linha.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
-        // Ignora datas e horas geradas pelo sistema
+        // Ignora datas/horas de edição
         if (/editad|modificad|criad|edited|created|\b\d{1,2}:\d{2}\b/i.test(linhaLimpa)) return;
 
-        // Captura o código numérico no início de cada linha
+        // Extrai apenas os números
         let match = linhaLimpa.match(/^[-*•☑☐\s]*(\d{2,6})(?!\d)/);
         if (match) {
             codigosEncontrados.push(match[1]);
         }
     });
 
-    // Remove duplicados
     codigosEncontrados = [...new Set(codigosEncontrados)];
 
     if (codigosEncontrados.length > 0) {
@@ -111,9 +108,9 @@ function verificarKeep() {
             }
         });
     } else {
-        if (!window.mostrarSucesso) atualizarStatus("🟡 Nenhum código detectado", "#ca8a04", "#ffffff");
+        if (!window.mostrarSucesso) atualizarStatus("🟡 Nenhum código detetado", "#ca8a04", "#ffffff");
     }
 }
 
-// Verifica as alterações de segundo a segundo
+// Verifica a cada 1 segundo (mas apenas se a aba estiver visível)
 setInterval(verificarKeep, 1000);
