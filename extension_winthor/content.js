@@ -1,4 +1,4 @@
-console.log("WinThor Keep AutoSync v7.0 - Modo Estrito Visível");
+console.log("WinThor Keep AutoSync v11.0 - Modo Original Restaurado");
 
 function criarIndicador() {
     if (document.getElementById("winthor-status-badge")) return;
@@ -33,29 +33,25 @@ window.ultimosCodigosEnviados = "";
 window.mostrarSucesso = false;
 
 function obterTextoCorpoNota() {
-    // 1. Tenta ler se a nota estiver aberta no meio do ecrã (pop-up)
-    let dialog = document.querySelector('div[role="dialog"]');
-    if (dialog && dialog.innerText.toLowerCase().includes("winthor")) {
-        return dialog.innerText || "";
-    }
+    // Busca a caixa modal aberta ou o corpo da página (método original)
+    let container = document.querySelector('div[role="dialog"]') || document.body;
+    let editaveis = Array.from(container.querySelectorAll('div[contenteditable="true"]'));
+    let textoTotal = "";
+    
+    editaveis.forEach(el => {
+        let label = el.getAttribute('aria-label') || "";
+        if (label.includes('Pesquisar') || label.includes('Search')) return;
+        
+        // Concatena o texto de cada linha individual da nota
+        textoTotal += (el.innerText || "") + "\n"; 
+    });
 
-    // 2. Se estiver fechada, lê os "cards" (grelha) da página inicial SEM PRECISAR CLICAR
-    let cards = document.querySelectorAll('div[role="button"], div.IZ65hb-TB32B, div.RNfche');
-    for (let card of cards) {
-        let textoCard = card.innerText || "";
-        if (textoCard.toLowerCase().includes("winthor")) {
-            return textoCard;
-        }
-    }
-
-    return "";
+    return textoTotal;
 }
 
 function verificarKeep() {
-    // ====================================================================
-    // TRAVA DE SEGURANÇA: Só executa se a aba do Google Keep estiver
-    // aberta e visível no ecrã. Se minimizar o Chrome, ele não faz NADA.
-    // ====================================================================
+    // TRAVA DE SEGURANÇA: Se o Chrome for minimizado, interrompe a leitura
+    // para não corromper o arquivo codigos.txt
     if (document.visibilityState !== "visible") {
         return; 
     }
@@ -64,7 +60,7 @@ function verificarKeep() {
     let textoCorpo = obterTextoCorpoNota();
 
     if (!textoCorpo || textoCorpo.trim() === "") {
-        if (!window.mostrarSucesso) atualizarStatus("🟡 Nota 'WinThor' não encontrada", "#ca8a04", "#ffffff");
+        if (!window.mostrarSucesso) atualizarStatus("🟡 Abra uma nota no Keep", "#ca8a04", "#ffffff");
         return;
     }
 
@@ -73,10 +69,9 @@ function verificarKeep() {
 
     linhas.forEach(linha => {
         let linhaLimpa = linha.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
-        // Ignora datas/horas de edição
         if (/editad|modificad|criad|edited|created|\b\d{1,2}:\d{2}\b/i.test(linhaLimpa)) return;
 
-        // Extrai apenas os números
+        // Identifica o código numérico no início de cada linha
         let match = linhaLimpa.match(/^[-*•☑☐\s]*(\d{2,6})(?!\d)/);
         if (match) {
             codigosEncontrados.push(match[1]);
@@ -108,9 +103,8 @@ function verificarKeep() {
             }
         });
     } else {
-        if (!window.mostrarSucesso) atualizarStatus("🟡 Nenhum código detetado", "#ca8a04", "#ffffff");
+        if (!window.mostrarSucesso) atualizarStatus("🟡 Nenhum código detectado", "#ca8a04", "#ffffff");
     }
 }
 
-// Verifica a cada 1 segundo (mas apenas se a aba estiver visível)
 setInterval(verificarKeep, 1000);
