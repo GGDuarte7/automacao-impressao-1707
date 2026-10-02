@@ -101,3 +101,9 @@ Se você mudar a resolução da tela ou mover a janela do WinThor:
 * **Extensão exibindo "Servidor Python desligado":** Execute o `Encerrar tudo.bat`, depois o `Iniciar tudo.bat` e pressione `F5` na aba do Google Keep.
 * **Coordenadas clicando no lugar errado:** Certifique-se de que a janela do WinThor está maximizada no mesmo monitor onde as coordenadas foram salvas.
 * **Processos presos em segundo plano:** Clique duas vezes em `Encerrar tudo.bat` para fechar todas as instâncias do Python e AutoHotkey presas na memória.
+
+---
+
+# Projeções
+* O intuito é conseguir automatizar o processo sendo totalmente em 2° plano, de forma que não atrapalhe outras tarefas enquanto a impressão fique em segundo plano
+* O problema: o WinThor é ultilizado de forma remota, ou seja, ele projeta um pc dentro do pc com apenas a função do WinThor. Isso dificulta a automação já que, não é possível ultilizar o pc remoto e apenas o WinThor, além disso ele precisaria de permissões de ADM para uso melhor e testes, e isso dentro da rede corporativa as vezes não é possível.
