@@ -11,7 +11,7 @@ Sistema de automação inteligente desenvolvido para capturar códigos de produt
 
 # Como ultilizar?
 
-* O uso recomendado é digitalizar a lista de codigos completa, ultilizando algum aplicativo ou a própia câmera ex.: a câmera do iPhone tem essa digitalização própia, copiar e enviar junto ao produto (ele detecta automáticamento o código no início de cada linha). Colar na nota desejada do keep e fazer o uso como no tutorial de vídeo.
+* O uso recomendado é digitalizar a lista de codigos completa, ultilizando algum aplicativo ou a própia câmera ex.: a câmera do iPhone tem essa digitalização própia, copiar e enviar junto ao produto (ele detecta automáticamento o código no início de cada linha, e para uso funcional o código precisa ficar no início de cada linha). Colar na nota desejada do keep e fazer o uso como no tutorial de vídeo.
 * Outro uso recomendado é usar pelo computador que também é possivel, apenas colar a lista na nota e seguir o processo.
 
 ---
