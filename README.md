@@ -1,6 +1,6 @@
+# Em caso de dúvidas ou problemas durante o uso, entrar em contato pelo e-mail: gabriel.duarte@dellys.com.br ou D8059GD@dellys.com.br
 
-
-
+---
 
 # 🖨️ Automação de Impressão em Lote — WinThor (Rotina 1707)
 
