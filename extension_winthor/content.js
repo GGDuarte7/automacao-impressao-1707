@@ -1,4 +1,4 @@
-console.log("WinThor Keep AutoSync Carregado!");
+console.log("WinThor Keep AutoSync v5.3 Carregado!");
 
 function criarIndicador() {
     if (document.getElementById("winthor-status-badge")) return;
@@ -33,18 +33,31 @@ window.ultimosCodigosEnviados = "";
 window.mostrarSucesso = false;
 
 function obterTextoCorpoNota() {
+    // Procura a nota aberta ou, em alternativa, o corpo inteiro do Keep
     let container = document.querySelector('div[role="dialog"]') || document.body;
+    
+    // Procura as caixas de texto editáveis reais onde o Keep guarda os dados
     let editaveis = Array.from(container.querySelectorAll('div[contenteditable="true"]'));
     let textoTotal = "";
-    
+
     editaveis.forEach(el => {
         let label = el.getAttribute('aria-label') || "";
+        // Ignora as barras de pesquisa
         if (label.includes('Pesquisar') || label.includes('Search')) return;
-        let rect = el.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-            textoTotal += (el.innerText || "") + "\n"; 
-        }
+
+        // USA O HTML INTERNO em vez do innerText visual.
+        // Assim, a extração funciona perfeitamente com a janela minimizada!
+        let html = el.innerHTML || "";
+        let textoConvertido = html
+            .replace(/&nbsp;/g, ' ')            // Converte espaços HTML
+            .replace(/<br\s*\/?>/gi, '\n')      // Converte quebras de linha simples
+            .replace(/<\/div>/gi, '\n')         // Converte blocos de linha (divs)
+            .replace(/<\/p>/gi, '\n')           // Converte parágrafos
+            .replace(/<[^>]*>/g, '');           // Remove qualquer outra tag de formatação
+        
+        textoTotal += textoConvertido + "\n";
     });
+
     return textoTotal;
 }
 
@@ -53,7 +66,7 @@ function verificarKeep() {
     let textoCorpo = obterTextoCorpoNota();
 
     if (!textoCorpo || textoCorpo.trim() === "") {
-        if (!window.mostrarSucesso) atualizarStatus("🟡 Abra uma nota no Keep", "#ca8a04", "#ffffff");
+        if (!window.mostrarSucesso) atualizarStatus("🟡 Abra a nota WinThor no Keep", "#ca8a04", "#ffffff");
         return;
     }
 
@@ -62,14 +75,17 @@ function verificarKeep() {
 
     linhas.forEach(linha => {
         let linhaLimpa = linha.replace(/[\u200B-\u200D\uFEFF]/g, '').trim();
+        // Ignora datas e horas geradas pelo sistema
         if (/editad|modificad|criad|edited|created|\b\d{1,2}:\d{2}\b/i.test(linhaLimpa)) return;
 
+        // Captura o código numérico no início de cada linha
         let match = linhaLimpa.match(/^[-*•☑☐\s]*(\d{2,6})(?!\d)/);
         if (match) {
             codigosEncontrados.push(match[1]);
         }
     });
 
+    // Remove duplicados
     codigosEncontrados = [...new Set(codigosEncontrados)];
 
     if (codigosEncontrados.length > 0) {
@@ -83,7 +99,7 @@ function verificarKeep() {
         }
 
         let textoParaPython = codigosEncontrados.join("\n");
-        
+
         chrome.runtime.sendMessage({ type: "SEND_DATA", texto: textoParaPython }, (response) => {
             if (chrome.runtime.lastError || !response || response.status !== "SUCCESS") {
                 atualizarStatus("🔴 Servidor Python desligado!", "#991b1b", "#ffffff");
@@ -99,4 +115,5 @@ function verificarKeep() {
     }
 }
 
+// Verifica as alterações de segundo a segundo
 setInterval(verificarKeep, 1000);
